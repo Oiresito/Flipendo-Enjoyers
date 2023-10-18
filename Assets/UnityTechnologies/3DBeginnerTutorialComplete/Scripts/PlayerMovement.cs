@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
     public float turnSpeed = 20f;
-
+    public TextMeshProUGUI info;
+    private int contcomida=0;
     Animator m_Animator;
     Rigidbody m_Rigidbody;
     AudioSource m_AudioSource;
@@ -52,5 +55,15 @@ public class PlayerMovement : MonoBehaviour
     {
         m_Rigidbody.MovePosition (m_Rigidbody.position + m_Movement * m_Animator.deltaPosition.magnitude);
         m_Rigidbody.MoveRotation (m_Rotation);
+    }
+    public void SetInfoText(string newInfo)
+	{        
+		info.text =newInfo.ToString();
+        
+	}
+
+    public void addComida(){
+        contcomida+=1;
+        SetInfoText(contcomida+"/2");
     }
 }

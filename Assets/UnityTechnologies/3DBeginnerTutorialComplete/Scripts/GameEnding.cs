@@ -10,6 +10,8 @@ public class GameEnding : MonoBehaviour
     public AudioSource exitAudio;
     public CanvasGroup caughtBackgroundImageCanvasGroup;
     public AudioSource caughtAudio;
+    public GameObject objetActivable1;
+    public GameObject objetActivable2;
 
     bool m_IsPlayerAtExit;
     bool m_IsPlayerCaught;
@@ -38,6 +40,8 @@ public class GameEnding : MonoBehaviour
         else if (m_IsPlayerCaught)
         {
             EndLevel (caughtBackgroundImageCanvasGroup, true, caughtAudio);
+            objetActivable1.SetActive(false);
+            objetActivable2.SetActive(false);
         }
     }
 
