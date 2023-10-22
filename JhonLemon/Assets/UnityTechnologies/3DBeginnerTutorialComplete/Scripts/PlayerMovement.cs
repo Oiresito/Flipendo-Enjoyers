@@ -123,4 +123,8 @@ public class PlayerMovement : MonoBehaviour
         contcomida+=1;
         SetInfoText(contcomida+"/2");
     }
+
+    public int setComida(){
+        return contcomida;
+    }
 }

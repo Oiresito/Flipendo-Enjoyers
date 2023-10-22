@@ -6,28 +6,46 @@ using System;
 public class UnitWithWayPoints : MonoBehaviour
 {
     public List<Transform> targets;
+    public Transform comida;
+    private int añadido=0;
     float speed = 1;
     Vector3[] path;
     int targetIndex;
     int currentTargetIndex = 0;
     float cubeSize = 0.2f;
+    [SerializeField] private PlayerMovement playermov;
 
     void Start()
     {
+        playermov=FindObjectOfType<PlayerMovement>();
+
         SetDestination();
     }
 
     void SetDestination()
     {
+        Debug.Log("voy a "+currentTargetIndex);
         if (currentTargetIndex < targets.Count)
         {
+            
             PathRequestManager.RequestPath(transform.position, targets[currentTargetIndex].position, OnPathFound);
         }
+        
+       /* if(playermov.setComida()==1 && añadido==0){//opcion 1 añado el punto aqui y modificio el index para que vaya al final
+            targets.Add(comida);
+            añadido = 1;
+            currentTargetIndex= targets.Count-1;//aqui-2, si es en followpath -1
+        }
+        if(playermov.setComida()==2 && añadido==1){//opcion 2 ruta directa
+            añadido = 2;
+            PathRequestManager.RequestPath(transform.position, comida.position, OnPathFound);
+        }*/
+       
     }
 
     public void OnPathFound(Vector3[] newpath, bool pathSuccessful)
     {
-        Debug.Log("pathSuccessful");
+        
         if (pathSuccessful)
         {
             path = newpath;
@@ -55,7 +73,16 @@ public class UnitWithWayPoints : MonoBehaviour
                     currentTargetIndex++;
                     if (currentTargetIndex >= targets.Count)
                     {
+                        targets.Remove(comida); //Si ya ha ido y reinicia lo elimina
                         currentTargetIndex = 0; // Reiniciar al primer destino
+                    }
+                    if(playermov.setComida()==1 && añadido==0){//opcion 3 meto la comida para que sea el siguiente punto
+                        targets.Insert(currentTargetIndex, comida);
+                        añadido = 1;
+                    }
+                    if(playermov.setComida()==2 && añadido==1){
+                        targets.Insert(currentTargetIndex, comida);
+                        añadido = 2;
                     }
                     SetDestination();
                     yield break;
