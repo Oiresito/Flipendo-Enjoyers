@@ -13,7 +13,7 @@ public class UnitWithWayPoints : MonoBehaviour
     int targetIndex;
     int currentTargetIndex = 0;
     float cubeSize = 0.2f;
-    [SerializeField] private PlayerMovement playermov;
+    private PlayerMovement playermov;
 
     void Start()
     {
@@ -24,7 +24,6 @@ public class UnitWithWayPoints : MonoBehaviour
 
     void SetDestination()
     {
-        Debug.Log("voy a "+currentTargetIndex);
         if (currentTargetIndex < targets.Count)
         {
             
@@ -36,8 +35,8 @@ public class UnitWithWayPoints : MonoBehaviour
             añadido = 1;
             currentTargetIndex= targets.Count-1;//aqui-2, si es en followpath -1
         }
-        if(playermov.setComida()==2 && añadido==1){//opcion 2 ruta directa
-            añadido = 2;
+        if(playermov.setComida()==1 && añadido==0){//opcion 2 ruta directa
+            añadido = 1;
             PathRequestManager.RequestPath(transform.position, comida.position, OnPathFound);
         }*/
        
@@ -76,19 +75,36 @@ public class UnitWithWayPoints : MonoBehaviour
                         targets.Remove(comida); //Si ya ha ido y reinicia lo elimina
                         currentTargetIndex = 0; // Reiniciar al primer destino
                     }
-                    if(playermov.setComida()==1 && añadido==0){//opcion 3 meto la comida para que sea el siguiente punto
-                        targets.Insert(currentTargetIndex, comida);
-                        añadido = 1;
-                    }
-                    if(playermov.setComida()==2 && añadido==1){
-                        targets.Insert(currentTargetIndex, comida);
-                        añadido = 2;
-                    }
+                    
                     SetDestination();
                     yield break;
                 }
-                currentWaypoint = path[targetIndex];
+                currentWaypoint = path[targetIndex]; 
+
             }
+            if (playermov.setComida() == 1 && añadido == 0)
+            {//opcion 3 meto la comida para que sea el siguiente punto
+                targets.Insert(currentTargetIndex, comida);
+                añadido = 1;
+                SetDestination();
+                yield break;
+            }
+            if (playermov.setComida() == 2 && añadido == 1)
+            {
+                targets.Insert(currentTargetIndex, comida);
+                añadido = 2;
+                SetDestination();
+                yield break;
+            }
+            if (playermov.setComida() == 3 && añadido == 2)
+            {
+                targets.Insert(currentTargetIndex, comida);
+                añadido = 3;
+                SetDestination();
+                yield break;
+            }
+
+
             transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
 
             Vector3 direction = currentWaypoint - transform.position;

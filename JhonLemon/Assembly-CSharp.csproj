@@ -50,10 +50,12 @@
      <Compile Include="Assets\UnityTechnologies\3DBeginnerTutorialComplete\Scripts\WaypointPatrol.cs" />
      <Compile Include="Assets\Scripts\PathRequestManager.cs" />
      <Compile Include="Assets\UnityTechnologies\3DBeginnerTutorialComplete\Scripts\GameEnding.cs" />
+     <Compile Include="Assets\Scripts\Walls.cs" />
      <Compile Include="Assets\Scripts\Node.cs" />
      <Compile Include="Assets\Scripts\Unit.cs" />
      <Compile Include="Assets\Scripts\Heap.cs" />
      <Compile Include="Assets\Scripts\UnitWithWayPoints.cs" />
+     <Compile Include="Assets\Scripts\UnitStatic.cs" />
      <Compile Include="Assets\UnityTechnologies\3DBeginnerTutorialComplete\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\LightSwitch.cs" />
      <Compile Include="Assets\Scripts\PathFinding.cs" />

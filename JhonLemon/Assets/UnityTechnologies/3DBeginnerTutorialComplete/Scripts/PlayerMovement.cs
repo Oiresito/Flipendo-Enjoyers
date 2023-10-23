@@ -11,10 +11,11 @@ public class PlayerMovement : MonoBehaviour
     Animator m_Animator;
     Rigidbody m_Rigidbody;
     AudioSource m_AudioSource;
+    [SerializeField]AudioSource soundComer;
     Vector3 m_Movement;
     Quaternion m_Rotation = Quaternion.identity;
     public TextMeshProUGUI info;
-    private int contcomida=0;
+    public int contcomida=0;
 
 
     [SerializeField] public cronometrojuego Temporizador;
@@ -121,10 +122,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void addComida(){
         contcomida+=1;
-        SetInfoText(contcomida+"/2");
+        soundComer.Play();
+        SetInfoText(contcomida+"/3");
     }
 
     public int setComida(){
         return contcomida;
     }
+
 }

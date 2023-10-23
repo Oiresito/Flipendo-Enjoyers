@@ -6,11 +6,11 @@ public class Unit : MonoBehaviour
 {
     public Transform target;
     public Transform startPoint;
-    float speed = 0.5f;
+    float speed = 0.6f;
     Vector3[] path;
     int targetIndex;
     float cubeSize = 0.2f;
-    [SerializeField] private PlayerMovement playermov; 
+    private PlayerMovement playermov; 
 
     void Start()
     {
